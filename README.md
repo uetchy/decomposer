@@ -39,3 +39,9 @@ body {
   ...
 }
 ```
+
+## Installation
+
+```console
+$ npm install --save-dev decomposer
+```
