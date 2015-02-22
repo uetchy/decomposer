@@ -1,6 +1,6 @@
 # Decomposer
 
-Decomposer is a Gulp plugin that provides __@import__ path resolver for __Bower__.
+Decomposer is a [__Gulp__](http://gulpjs.com/) plugin that provides __@import__ path resolver for [__Bower__](http://bower.io/).
 
 Here is example:
 
