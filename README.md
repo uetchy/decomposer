@@ -7,8 +7,9 @@ Here is example:
 __gulpfile.coffee__
 
 ```node
-decomposer = require 'decomposer'
+gulp = require 'gulp'
 sass = require 'gulp-sass'
+decomposer = require 'decomposer'
 
 gulp.task 'styles', ->
   gulp.src 'src/styles/**/*.sass'
