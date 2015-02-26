@@ -43,3 +43,10 @@ body
 ```console
 $ npm install --save-dev decomposer
 ```
+
+## Testing
+
+```console
+$ npm install
+$ npm test
+```
