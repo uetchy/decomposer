@@ -41,13 +41,13 @@ guessEOL = (strings) ->
 
 setupBowerOptions = (basePath = process.cwd())->
   opt =
-    configPath: path.join(basePath, '/bower.json')
-    componentsPath: path.join(basePath, '/bower_components')
+    configPath: path.join(basePath, 'bower.json')
+    componentsPath: path.join(basePath, 'bower_components')
 
   files = fs.readdirSync(basePath)
 
   if files.indexOf('.bowerrc') != -1
-    if temp = fs.readFileSync(basePath + '/.bowerrc')
+    if temp = fs.readFileSync(path.join(basePath, '.bowerrc'))
       json = JSON.parse(temp)
 
       if json.json
