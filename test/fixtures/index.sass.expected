@@ -1,4 +1,0 @@
-@import bower_components/styles/font
-
-body
-  font-family: $ff-gothic

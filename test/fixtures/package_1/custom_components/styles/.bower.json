@@ -5,6 +5,7 @@
   ],
   "description": "plenty of styles for designing web.",
   "main": [
+    "index.js",
     "index.sass",
     "_font.sass",
     "_reset.sass",

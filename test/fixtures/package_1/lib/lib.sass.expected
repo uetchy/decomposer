@@ -1,0 +1,4 @@
+@import ../custom_components/styles/font
+
+body
+  font-family: $ff-gothic

@@ -1,0 +1,4 @@
+@import custom_components/styles/index.sass
+
+body
+  font-family: $ff-gothic
