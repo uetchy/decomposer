@@ -1,6 +1,6 @@
 fs = require 'fs'
-through = require 'through2'
 path = require 'path'
+through = require 'through2'
 gutil = require 'gulp-util'
 
 MATCHER = /@import\s+["']?([\w\.\/\-=\(\)]+)(?:["']\s*;)?/
@@ -41,15 +41,20 @@ guessEOL = (strings) ->
 
 setupBowerOptions = (basePath = process.cwd())->
   opt =
-    configPath: basePath + '/bower.json'
-    componentsPath: basePath + '/bower_components'
+    configPath: path.join(basePath, '/bower.json')
+    componentsPath: path.join(basePath, '/bower_components')
 
   files = fs.readdirSync(basePath)
 
   if files.indexOf('.bowerrc') != -1
     if temp = fs.readFileSync(basePath + '/.bowerrc')
-      opt.configPath = JSON.parse(temp).json
-      opt.componentsPath = JSON.parse(temp).directory
+      json = JSON.parse(temp)
+
+      if json.json
+        opt.configPath = path.join(basePath, json.json)
+
+      if json.directory
+        opt.componentsPath = path.join(basePath, json.directory)
 
   return opt
 
