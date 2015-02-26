@@ -1,5 +1,7 @@
 # Decomposer
 
+[![Build Status](https://travis-ci.org/uetchy/decomposer.svg?branch=master)](https://travis-ci.org/uetchy/decomposer)
+
 Decomposer is a [__Gulp__](http://gulpjs.com/) plugin that provides __@import__ path resolver for [__Bower__](http://bower.io/).
 
 Here is example:
