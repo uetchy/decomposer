@@ -1,7 +1,18 @@
 {
   "name": "decomposer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Decomposer is a Gulp plugin that provides @import path resolver for Bower.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uetchy/decomposer"
+  },
+  "keywords": [
+    "bower",
+    "gulp",
+    "sass",
+    "scss",
+    "@import"
+  ],
   "main": "decomposer.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register test/"
