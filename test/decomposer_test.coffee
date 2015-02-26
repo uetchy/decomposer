@@ -2,8 +2,6 @@
 through = require('through2')
 path = require('path')
 fs = require('fs')
-mocks = require('mocks')
-{loadFile} = mocks
 gulp = require('gulp')
 decomposer = require('../decomposer')
 
