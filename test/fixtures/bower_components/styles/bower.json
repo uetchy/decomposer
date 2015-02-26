@@ -1,0 +1,23 @@
+{
+  "name": "styles",
+  "version": "1.0.0",
+  "authors": [
+    "Yasuaki Uechi <uetchy@randompaper.co>"
+  ],
+  "description": "plenty of styles for designing web.",
+  "main": [
+    "index.sass",
+    "_font.sass",
+    "_reset.sass",
+    "_splittable.sass"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/uetchy/styles",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

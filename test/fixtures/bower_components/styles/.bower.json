@@ -1,0 +1,32 @@
+{
+  "name": "styles",
+  "authors": [
+    "Yasuaki Uechi <uetchy@randompaper.co>"
+  ],
+  "description": "plenty of styles for designing web.",
+  "main": [
+    "index.sass",
+    "_font.sass",
+    "_reset.sass",
+    "_splittable.sass"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/uetchy/styles",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "c54360f6bf",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "c54360f6bfa126fbb9f8f59193bfc7a21b3ed7f9"
+  },
+  "_source": "git://github.com/uetchy/styles.git",
+  "_target": "*",
+  "_originalSource": "uetchy/styles",
+  "_direct": true
+}
