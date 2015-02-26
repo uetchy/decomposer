@@ -23,9 +23,8 @@ and __src/styles/index.sass__,
 ```sass
 @import normalize.sass
 
-body {
+body
   ...
-}
 ```
 
 > `normalize.sass` is actually located at __bower_components__.
@@ -35,9 +34,8 @@ After processing through Decomposer, all of @import paths in __dist/css/index.cs
 ```sass
 @import ../bower_components/normalize.sass/normalize.sass
 
-body {
+body
   ...
-}
 ```
 
 ## Installation
