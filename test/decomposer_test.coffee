@@ -1,9 +1,9 @@
-expect = require('chai').expect
+{expect} = require('chai')
 through = require('through2')
 path = require('path')
 fs = require('fs')
 mocks = require('mocks')
-loadFile = mocks.loadFile
+{loadFile} = mocks
 gulp = require('gulp')
 decomposer = require('../decomposer')
 
