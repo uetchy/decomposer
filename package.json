@@ -4,7 +4,7 @@
   "description": "Decomposer is a Gulp plugin that provides @import path resolver for Bower.",
   "main": "decomposer.js",
   "scripts": {
-    "test": "mocha test/decomposer.test.js"
+    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register test/"
   },
   "author": "Yasuaki Uechi <uetchy@randompaper.co>",
   "license": "MIT",
