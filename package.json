@@ -15,7 +15,7 @@
   ],
   "main": "decomposer.js",
   "scripts": {
-    "test": "$(npm bin)mocha --compilers coffee:coffee-script/register test/"
+    "test": "$(npm bin)/mocha --compilers coffee:coffee-script/register test/"
   },
   "author": "Yasuaki Uechi <uetchy@randompaper.co>",
   "license": "MIT",

@@ -24,7 +24,7 @@ describe 'decomposer', ->
       filename = path.join(__dirname, './fixtures/package_1/lib/lib.sass')
       gulp.src filename
         .pipe decomposer()
-        .pipe through.obj(file, enc, cb) ->
+        .pipe through.obj (file, enc, cb) ->
           expected = fs.readFileSync(path.join(__dirname, './fixtures/package_1/lib/lib.sass.expected'))
           expect(String(file.contents)).to.be.equal String(expected)
           done()
