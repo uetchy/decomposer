@@ -1,7 +1,6 @@
-gulp = require 'gulp'
-
+gulp    = require 'gulp'
 plumber = require 'gulp-plumber'
-coffee = require 'gulp-coffee'
+coffee  = require 'gulp-coffee'
 
 gulp.task 'build', ->
   gulp.src 'src/**/*.coffee'

@@ -1,14 +1,13 @@
-fs = require 'fs'
-path = require 'path'
+fs      = require 'fs'
+path    = require 'path'
 through = require 'through2'
-gutil = require 'gulp-util'
+gutil   = require 'gulp-util'
 
 MATCHER = /@import\s+["']?([\w\.\/\-=\(\)]+)(?:["']\s*;)?/
 PLUGIN_NAME = 'Decomposer'
 
 Decomposer = (options = {}) ->
-
-  basePath = process.cwd()
+  basePath     = process.cwd()
   bowerOptions = setupBowerOptions(basePath)
 
   through.obj (file, encoding, callback) ->
@@ -16,10 +15,10 @@ Decomposer = (options = {}) ->
       @emit 'error', new gutil.PluginError PLUGIN_NAME, 'Streams are not supported'
       return callback()
 
-    fileDir = path.dirname(file.path)
+    fileDir      = path.dirname(file.path)
     fileContents = String(file.contents)
-    eol = guessEOL(fileContents)
-    lines = fileContents.split(/\r?\n/)
+    eol          = guessEOL(fileContents)
+    lines        = fileContents.split(/\r?\n/)
 
     for line, i in lines
       if res = line.match(MATCHER)
