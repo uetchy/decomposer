@@ -24,6 +24,7 @@
     "through2": "^0.6.5"
   },
   "devDependencies": {
+    "babel": "^5.4.7",
     "babel-eslint": "^3.1.9",
     "chai": "^2.3.0",
     "eslint": "^0.21.2",
