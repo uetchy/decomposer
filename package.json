@@ -15,7 +15,7 @@
   ],
   "main": "decomposer.js",
   "scripts": {
-    "test": "$(npm bin)/mocha --compilers coffee:coffee-script/register test/"
+    "test": "$(npm bin)/mocha --compilers js:babel/register test/*.es6"
   },
   "author": "Yasuaki Uechi <uetchy@randompaper.co>",
   "license": "MIT",
@@ -26,11 +26,12 @@
   "devDependencies": {
     "babel-eslint": "^3.1.9",
     "chai": "^2.3.0",
-    "coffee-script": "^1.9.2",
     "eslint": "^0.21.2",
     "gulp": "^3.8.11",
     "gulp-babel": "^5.1.0",
+    "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.1",
+    "gulp-shell": "^0.4.1",
     "mocha": "^2.2.5"
   }
 }
