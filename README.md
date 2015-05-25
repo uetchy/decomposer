@@ -6,18 +6,19 @@ Decomposer is a [__Gulp__](http://gulpjs.com/) plugin that provides __@import__ 
 
 Here is example:
 
-__gulpfile.coffee__
+__gulpfile.js__
 
 ```node
-gulp = require 'gulp'
-sass = require 'gulp-sass'
-decomposer = require 'decomposer'
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var decomposer = require('decomposer');
 
-gulp.task 'styles', ->
-  gulp.src 'src/styles/**/*.sass'
-    .pipe decomposer()
-    .pipe sass(indentedSyntax: true)
-    .pipe gulp.dest 'dist/css'
+gulp.task('styles', function() {
+  gulp.src('src/styles/**/*.sass')
+    .pipe(decomposer({indentedSyntax: true}))
+    .pipe(sass())
+    .pipe(gulp.dest('dist/css'));
+});
 ```
 
 and __src/styles/index.sass__,
