@@ -1,41 +1,124 @@
-var Decomposer, MATCHER, PLUGIN_NAME, fs, guessBowerMainFile, guessEOL, gutil, path, setupBowerOptions, through;
+'use strict';
 
-fs = require('fs');
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports['default'] = Decomposer;
 
-path = require('path');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-through = require('through2');
+var _fs = require('fs');
 
-gutil = require('gulp-util');
+var _fs2 = _interopRequireDefault(_fs);
 
-MATCHER = /@import\s+["']?([\w\.\/\-=\(\)]+)(?:["']\s*;)?/;
+var _path = require('path');
 
-PLUGIN_NAME = 'Decomposer';
+var _path2 = _interopRequireDefault(_path);
 
-Decomposer = function(options) {
-  var basePath, bowerOptions;
+var _through2 = require('through2');
+
+var _through22 = _interopRequireDefault(_through2);
+
+var _gulpUtil = require('gulp-util');
+
+var _gulpUtil2 = _interopRequireDefault(_gulpUtil);
+
+var MATCHER = /@import\s+["']?([\w\.\/\-=\(\)]+)(?:["']\s*;)?/;
+var PLUGIN_NAME = 'Decomposer';
+
+function guessEOL(strings) {
+  return strings.match(/(\r?\n)/)[1];
+}
+
+function setupBowerOptions(basePath) {
+  if (basePath == null) {
+    basePath = process.cwd();
+  }
+  var opt = {
+    configPath: _path2['default'].join(basePath, 'bower.json'),
+    componentsPath: _path2['default'].join(basePath, 'bower_components')
+  };
+  var files = _fs2['default'].readdirSync(basePath);
+  if (files.indexOf('.bowerrc') !== -1) {
+    var temp = _fs2['default'].readFileSync(_path2['default'].join(basePath, '.bowerrc'));
+    if (temp) {
+      var json = JSON.parse(temp);
+      if (json.json) {
+        opt.configPath = _path2['default'].join(basePath, json.json);
+      }
+      if (json.directory) {
+        opt.componentsPath = _path2['default'].join(basePath, json.directory);
+      }
+    }
+  }
+  return opt;
+}
+
+function guessBowerMainFile(moduleName, modulePath) {
+  var bowerOptions = setupBowerOptions(modulePath);
+  var mainFiles = JSON.parse(_fs2['default'].readFileSync(bowerOptions.configPath)).main;
+  if (mainFiles) {
+    if (typeof mainFiles === 'string') {
+      return mainFiles;
+    }
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = mainFiles[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var file = _step.value;
+
+        var filename = _path2['default'].basename(file, _path2['default'].extname(file));
+        if (filename === moduleName || filename === 'index') {
+          return file;
+        }
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator['return']) {
+          _iterator['return']();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+  }
+  return moduleName;
+}
+
+function Decomposer(options) {
   if (options == null) {
     options = {};
   }
-  basePath = process.cwd();
-  bowerOptions = setupBowerOptions(basePath);
-  return through.obj(function(file, encoding, callback) {
-    var eol, fileContents, fileDir, i, j, len, line, lines, moduleName, modulePath, ref, res, specifiedTargetPath, targetPath, targetPathRelative;
+
+  var basePath = process.cwd();
+  var bowerOptions = setupBowerOptions(basePath);
+
+  return _through22['default'].obj(function (file, encoding, callback) {
     if (file.isStream()) {
-      this.emit('error', new gutil.PluginError(PLUGIN_NAME, 'Streams are not supported'));
+      this.emit('error', new _gulpUtil2['default'].PluginError(PLUGIN_NAME, 'Streams are not supported'));
       return callback();
     }
-    fileDir = path.dirname(file.path);
-    fileContents = String(file.contents);
-    eol = guessEOL(fileContents);
-    lines = fileContents.split(/\r?\n/);
-    for (i = j = 0, len = lines.length; j < len; i = ++j) {
-      line = lines[i];
-      if (res = line.match(MATCHER)) {
-        ref = res[1].split('/'), moduleName = ref[0], specifiedTargetPath = ref[1];
-        modulePath = bowerOptions.componentsPath + '/' + moduleName;
-        targetPath = specifiedTargetPath || guessBowerMainFile(moduleName, modulePath);
-        targetPathRelative = path.relative(fileDir, modulePath + '/' + targetPath);
+    var fileDir = _path2['default'].dirname(file.path);
+    var fileContents = String(file.contents);
+    var eol = guessEOL(fileContents);
+    var lines = fileContents.split(/\r?\n/);
+    for (var i in lines) {
+      var line = lines[i];
+      var res = line.match(MATCHER);
+      if (res) {
+        var ref = res[1].split('/'),
+            moduleName = ref[0],
+            specifiedTargetPath = ref[1];
+        var modulePath = bowerOptions.componentsPath + '/' + moduleName;
+        var targetPath = specifiedTargetPath || guessBowerMainFile(moduleName, modulePath);
+        var targetPathRelative = _path2['default'].relative(fileDir, modulePath + '/' + targetPath);
         lines[i] = line.replace(res[1], targetPathRelative);
       }
     }
@@ -43,52 +126,6 @@ Decomposer = function(options) {
     this.push(file);
     return callback();
   });
-};
+}
 
-guessEOL = function(strings) {
-  return strings.match(/(\r?\n)/)[1];
-};
-
-setupBowerOptions = function(basePath) {
-  var files, json, opt, temp;
-  if (basePath == null) {
-    basePath = process.cwd();
-  }
-  opt = {
-    configPath: path.join(basePath, 'bower.json'),
-    componentsPath: path.join(basePath, 'bower_components')
-  };
-  files = fs.readdirSync(basePath);
-  if (files.indexOf('.bowerrc') !== -1) {
-    if (temp = fs.readFileSync(path.join(basePath, '.bowerrc'))) {
-      json = JSON.parse(temp);
-      if (json.json) {
-        opt.configPath = path.join(basePath, json.json);
-      }
-      if (json.directory) {
-        opt.componentsPath = path.join(basePath, json.directory);
-      }
-    }
-  }
-  return opt;
-};
-
-guessBowerMainFile = function(moduleName, modulePath) {
-  var bowerOptions, file, filename, j, len, mainFiles;
-  bowerOptions = setupBowerOptions(modulePath);
-  if (mainFiles = JSON.parse(fs.readFileSync(bowerOptions.configPath)).main) {
-    if (typeof mainFiles === 'string') {
-      return mainFiles;
-    }
-    for (j = 0, len = mainFiles.length; j < len; j++) {
-      file = mainFiles[j];
-      filename = path.basename(file, path.extname(file));
-      if (filename === moduleName || filename === 'index') {
-        return file;
-      }
-    }
-  }
-  return moduleName;
-};
-
-module.exports = Decomposer;
+module.exports = exports['default'];

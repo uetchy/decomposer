@@ -1,12 +1,12 @@
 gulp    = require 'gulp'
 plumber = require 'gulp-plumber'
-coffee  = require 'gulp-coffee'
+babel   = require 'gulp-babel'
 
-gulp.task 'build', ->
-  gulp.src 'src/**/*.coffee'
+gulp.task 'babel', ->
+  gulp.src 'src/*.es6'
     .pipe plumber()
-    .pipe coffee bare: true
+    .pipe babel()
     .pipe gulp.dest './'
 
-gulp.task 'watch', ['build'], ->
-  gulp.watch 'src/**/*.coffee', ['build']
+gulp.task 'watch', ['babel'], ->
+  gulp.watch 'src/*.es6', ['babel']

@@ -15,7 +15,8 @@ describe 'decomposer', ->
       gulp.src filename
         .pipe decomposer()
         .pipe through.obj (file, enc, cb) ->
-          expected = fs.readFileSync(path.join(__dirname, './fixtures/package_1/index.sass.expected'))
+          expected = fs.readFileSync(
+            path.join(__dirname, './fixtures/package_1/index.sass.expected'))
           expect(String(file.contents)).to.be.equal String(expected)
           done()
 
@@ -25,15 +26,22 @@ describe 'decomposer', ->
       gulp.src filename
         .pipe decomposer()
         .pipe through.obj (file, enc, cb) ->
-          expected = fs.readFileSync(path.join(__dirname, './fixtures/package_1/lib/lib.sass.expected'))
+          expected = fs.readFileSync(
+            path.join(__dirname, './fixtures/package_1/lib/lib.sass.expected'))
           expect(String(file.contents)).to.be.equal String(expected)
           done()
 
     it 'can resolve path / 2', (done) ->
-      filename = path.join(__dirname, './fixtures/package_1/lib/components/component.sass')
+      filename = path.join(
+        __dirname, './fixtures/package_1/lib/components/component.sass')
       gulp.src filename
         .pipe decomposer()
         .pipe through.obj (file, enc, cb) ->
-          expected = fs.readFileSync(path.join(__dirname, './fixtures/package_1/lib/components/component.sass.expected'))
+          expected = fs.readFileSync(
+            path.join(
+              __dirname,
+              './fixtures/package_1/lib/components/component.sass.expected'
+            )
+          )
           expect(String(file.contents)).to.be.equal String(expected)
           done()
